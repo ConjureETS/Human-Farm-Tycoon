@@ -3,15 +3,15 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class RessourceController{
-    Bank bank;
+    Stats stats;
     Text viewWood;
     Text viewRock;
     Text viewCorpse;
     Text viewMeat;
 
-    public RessourceController(Bank b, Text viewW, Text viewR, Text viewC, Text viewM)
+    public RessourceController(Stats stats, Text viewW, Text viewR, Text viewC, Text viewM)
     {
-        this.bank = b;
+        this.stats = stats;
         this.viewCorpse = viewC;
         this.viewWood = viewW;
         this.viewRock = viewR;
@@ -19,34 +19,34 @@ public class RessourceController{
     }
 
     public void setRock(int nbRock){
-        bank.AmountOfRock = nbRock;
+        stats.AmountOfRock = nbRock;
     }
     public int getRock(){
-        return bank.AmountOfRock;
+        return stats.AmountOfRock;
     }
     public void setWood(int nbWood)
     {
-        bank.AmountOfWood = nbWood;
+        stats.AmountOfWood = nbWood;
     }
     public int getWood()
     {
-        return bank.AmountOfWood;
+        return stats.AmountOfWood;
     }
     public void setCorpse(int nbCorpse)
     {
-        bank.AmountOfCorpse = nbCorpse;
+        stats.AmountOfCorpse = nbCorpse;
     }
     public int getCorpse()
     {
-        return bank.AmountOfCorpse;
+        return stats.AmountOfCorpse;
     }
     public void setMeat(int nbMeat)
     {
-        bank.AmountOfMeat = nbMeat;
+        stats.AmountOfMeat = nbMeat;
     }
     public int getMeat()
     {
-        return bank.AmountOfMeat;
+        return stats.AmountOfMeat;
     }
 
     public void UpdateView()
