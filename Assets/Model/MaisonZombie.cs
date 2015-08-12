@@ -3,15 +3,14 @@ using System.Collections;
 
 public class MaisonZombie : Maison{
 
-
-    private int nbZombie;
+    private int nbZombies;
 
     void addZombie(int montant)
     {
-        if (nbZombie < MAX_CARACTERES)
+        if (nbZombies < MAX_CARACTERES)
         {
-            //TODO: assign zombie to this house or decrement houseless zombie
-            nbZombie++;
+            //TODO: assign zombie to this house OR decrement houseless zombie
+            nbZombies++;
         }
 
         else
