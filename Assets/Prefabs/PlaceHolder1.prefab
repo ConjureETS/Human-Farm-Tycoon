@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &199446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 490406}
+  - 212: {fileID: 21234018}
+  - 114: {fileID: 11481328}
+  - 60: {fileID: 6080492}
+  m_Layer: 0
+  m_Name: PlaceHolder1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &490406
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.85757971, y: 1.11362386, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!60 &6080492
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199446}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -11.5, y: 25.5}
+      - {x: -16.5, y: 25.5}
+      - {x: -45.5, y: -3.5}
+      - {x: -45.5, y: -6.5}
+      - {x: -42.5, y: -8.5}
+      - {x: 8.5, y: -25.5}
+      - {x: 16.5, y: -25.5}
+      - {x: 45.5, y: 3.5}
+      - {x: 45.5, y: 4.5}
+      - {x: 42.5, y: 7.5}
+--- !u!114 &11481328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a76c17052341444aa00a1e12eca8a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConstructionType: 1
+  maisonHumain: {fileID: 170046, guid: 7dd8f56c6f4a3134cb910e45612b48dc, type: 2}
+  maisonZombie: {fileID: 107150, guid: fba0e64655f97484f92b9f8374f7b85f, type: 2}
+  champ: {fileID: 144572, guid: 80999b09e928d61488603577917d914a, type: 2}
+--- !u!212 &21234018
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199446}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: dee32253dbd440e4cb239070cee9a3e9, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: maisonHumain
+      value: 
+      objectReference: {fileID: 170046, guid: 7dd8f56c6f4a3134cb910e45612b48dc, type: 2}
+    - target: {fileID: 0}
+      propertyPath: maisonZombie
+      value: 
+      objectReference: {fileID: 107150, guid: fba0e64655f97484f92b9f8374f7b85f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: champ
+      value: 
+      objectReference: {fileID: 144572, guid: 80999b09e928d61488603577917d914a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ConstructionType
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 199446}
+  m_IsPrefabParent: 1

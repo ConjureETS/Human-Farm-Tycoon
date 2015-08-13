@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class WorkerController : MonoBehaviour{
+public class WorkerControllerMeat : MonoBehaviour
+{
 
     public Text nbWorker;
     public Text zombieAvailable;
@@ -11,25 +12,27 @@ public class WorkerController : MonoBehaviour{
     public Button RemoveButton;
     private Stats stats;
 
+
+
     public void AddWorker()
     {
         stats.removeZombieAvail();
-        stats.NbZombieAssigneWood++;
+        stats.NbZombieAssigneMeat++;
         UpdateView();
     }
 
     public void LessWorker()
     {
         stats.addZombieAvail();
-        stats.NbZombieAssigneWood--;
+        stats.NbZombieAssigneMeat--;
         UpdateView();
     }
 
     private void UpdateView()
     {
         zombieAvailable.text = stats.AmountOfZombiesAvail + "/" + stats.AmountOfZombies;
-        nbRessourceExpected.text = ""+stats.NbOfWoodByZombie * stats.NbZombieAssigneWood;
-        nbWorker.text = ""+stats.NbZombieAssigneWood;
+        nbRessourceExpected.text = "" + stats.NbOfMeatByZombie * stats.NbZombieAssigneMeat;
+        nbWorker.text = "" + stats.NbZombieAssigneMeat;
 
         if (stats.AmountOfZombiesAvail <= 0)
         {
@@ -40,7 +43,7 @@ public class WorkerController : MonoBehaviour{
             AddButton.enabled = true;
         }
 
-        if (stats.NbZombieAssigneWood <= 0)
+        if (stats.NbZombieAssigneMeat <= 0)
         {
             RemoveButton.enabled = false;
         }
@@ -50,14 +53,16 @@ public class WorkerController : MonoBehaviour{
         }
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         stats = GameObject.Find("Stats").gameObject.GetComponent<Stats>();
+        //UpdateView();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         UpdateView();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 }
