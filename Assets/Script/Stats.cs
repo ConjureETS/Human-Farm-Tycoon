@@ -22,7 +22,7 @@ public class Stats : MonoBehaviour
     private int nbZombieAssigneRock;
     private int nbZombieAssigneCorpse;
     private int nbZombieAssigneMeat;
-
+    
 	public int NbZombieAssigneMeat
 	{
 		get { return nbZombieAssigneMeat;}
@@ -212,7 +212,7 @@ public class Stats : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        resetStats(0, 0, 0, 0, 4, 1, 5, 5, 5, 5);
+        resetStats(7, 6, 5, 4, 4, 10, 5, 2, 3, 1);
 	}
 	
 	// Update is called once per frame
