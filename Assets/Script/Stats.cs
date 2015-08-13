@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Stats : MonoBehaviour {
-
+public class Stats : MonoBehaviour
+{
+    #region attributes
     private int amountOfRock;
     private int amountOfWood;
     private int amountOfCorpse;
@@ -12,6 +13,64 @@ public class Stats : MonoBehaviour {
     private int amountOfHumans;
     private int amountOfZombiesAvail;
 
+    private int nbOfWoodByZombie;
+    private int nbOfRockByZombie;
+    private int nbOfMeatByZombie;
+    private int nbOfCorpseByZombie;
+
+    private int nbZombieAssigneWood;
+    private int nbZombieAssigneRock;
+    private int nbZombieAssigneCorpse;
+    private int nbZombieAssigneMeat;
+    
+	public int NbZombieAssigneMeat
+	{
+		get { return nbZombieAssigneMeat;}
+		set { nbZombieAssigneMeat = value;}
+	}	
+
+	public int NbZombieAssigneCorpse
+	{
+		get { return nbZombieAssigneCorpse;}
+		set { nbZombieAssigneCorpse = value;}
+	}
+
+    public int NbZombieAssigneRock
+    {
+        get { return nbZombieAssigneRock; }
+        set { nbZombieAssigneRock = value; }
+    }  
+
+    public int NbZombieAssigneWood
+    {
+        get { return nbZombieAssigneWood; }
+        set { nbZombieAssigneWood = value; }
+    }
+
+    public int NbOfCorpseByZombie
+    {
+        get { return nbOfCorpseByZombie; }
+        set { nbOfCorpseByZombie = value; }
+    }    
+
+    public int NbOfMeatByZombie
+    {
+        get { return nbOfMeatByZombie; }
+        set { nbOfMeatByZombie = value; }
+    } 
+
+    public int NbOfRockByZombie
+    {
+        get { return nbOfRockByZombie; }
+        set { nbOfRockByZombie = value; }
+    }
+    
+    public int NbOfWoodByZombie
+    {
+        get { return nbOfWoodByZombie; }
+        set { nbOfWoodByZombie = value; }
+    }
+    
     public int AmountOfMeat
     {
         get { return amountOfMeat; }
@@ -41,7 +100,6 @@ public class Stats : MonoBehaviour {
         get { return amountOfZombies; }
         set { amountOfZombies = value; }
     }
-
     public int AmountOfHumans
     {
         get { return amountOfHumans; }
@@ -54,20 +112,6 @@ public class Stats : MonoBehaviour {
         set { amountOfZombiesAvail = value; }
     }
 
-    public Stats(int nbRock, int nbWood, int nbCorpse, int nbMeat, int nbHumans, int nbZombies)
-    {
-        resetStats(nbRock, nbWood, nbCorpse, nbMeat, nbHumans, nbZombies);
-    }
-
-    public void resetStats(int nbRock, int nbWood, int nbCorpse, int nbMeat, int nbHumans, int nbZombies) 
-    {
-        AmountOfCorpse = nbCorpse;
-        AmountOfMeat = nbMeat;
-        AmountOfRock = nbRock;
-        AmountOfWood = nbWood;
-        AmountOfHumans = nbHumans;
-        AmountOfZombies = nbZombies;
-    }
 
     public void addCorpse()
     {
@@ -138,10 +182,37 @@ public class Stats : MonoBehaviour {
     {
         amountOfZombiesAvail--;
     }
+#endregion
+
+
+    public Stats(int nbRock, int nbWood, int nbCorpse, int nbMeat, int nbHumans, int nbZombies)
+    {
+        resetStats(nbRock, nbWood, nbCorpse, nbMeat, nbHumans, nbZombies, 5, 5, 5, 5);
+    }
+
+    public void resetStats(int nbRock, int nbWood, int nbCorpse, int nbMeat, int nbHumans, int nbZombies,
+        int nbOfWoodByZombie, int nbOfRockByZombie, int nbOfMeatByZombie, int nbOfCorpseByZombie)
+    {
+        AmountOfCorpse = nbCorpse;
+        AmountOfMeat = nbMeat;
+        AmountOfRock = nbRock;
+        AmountOfWood = nbWood;
+        AmountOfHumans = nbHumans;
+        AmountOfZombies = nbZombies;
+        NbOfCorpseByZombie = nbOfCorpseByZombie;
+        NbOfMeatByZombie = nbOfMeatByZombie;
+        NbOfRockByZombie = nbOfRockByZombie;
+        NbOfWoodByZombie = nbOfWoodByZombie;
+        NbZombieAssigneWood = 0;
+        NbZombieAssigneRock = 0;
+        NbZombieAssigneCorpse = 0;
+        NbZombieAssigneMeat = 0;
+        AmountOfZombiesAvail = AmountOfZombies;
+    }
 
 	// Use this for initialization
 	void Start () {
-        resetStats(0, 0, 0, 0, 4, 1);
+        resetStats(7, 6, 5, 4, 4, 10, 5, 2, 3, 1);
 	}
 	
 	// Update is called once per frame
