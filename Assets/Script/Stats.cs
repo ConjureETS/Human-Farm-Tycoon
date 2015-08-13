@@ -4,9 +4,23 @@ using System;
 
 public class Stats : MonoBehaviour
 {
+    #region constants
+
+    private readonly int HOUSE_SUPPLY_CAP = 10;
+    private readonly int HUMANS_PER_HOUSE = 2;
+    private readonly int HUNGER_PER_ZOMBIE = 100;
+    private readonly int HUNGER_PER_HUMAN = 100;
+    private readonly int HUNGER_DEDUCT_PER_DAY_H = 25;
+    private readonly int HUNGER_DEDUCT_PER_DAY_Z = 10;
+
+    #endregion
+
     #region attributes
 
     private int nbTurns;
+
+    private int maxHungerHuman;
+    private int maxHungerZombies;
 
     private int amountOfRock;
     private int amountOfWood;
@@ -49,6 +63,18 @@ public class Stats : MonoBehaviour
     {
         get { return nbHumanHouses; }
         set { nbHumanHouses = value; }
+    }
+
+    public int MaxHungerHuman
+    {
+        get { return maxHungerHuman; }
+        set { maxHungerHuman = value; }
+    }
+
+    public int MaxHungerZombies
+    {
+        get { return maxHungerZombies; }
+        set { maxHungerZombies = value; }
     }
 
     public int AmountZombieHouse
@@ -223,10 +249,11 @@ public class Stats : MonoBehaviour
     }
 #endregion
 
+    /*
     public Stats(int nbRock, int nbWood, int nbCorpse, int nbMeat, int nbHumans, int nbZombies)
     {
         resetStats(nbRock, nbWood, nbCorpse, nbMeat, nbHumans, nbZombies, 5, 5, 5, 5);
-    }
+    }*/
 
     public void resetStats(int nbRock, int nbWood, int nbCorpse, int nbMeat, int nbHumans, int nbZombies,
         int nbOfWoodByZombie, int nbOfRockByZombie, int nbOfMeatByZombie, int nbOfCorpseByZombie)
@@ -246,8 +273,13 @@ public class Stats : MonoBehaviour
         NbZombieAssigneCorpse = 0;
         NbZombieAssigneMeat = 0;
         AmountOfZombiesAvail = AmountOfZombies;
-        AmountOfHHunger = 250 * AmountOfHumans;
-        AmountOfZHunger = 500 * AmountOfZombies;
+        
+
+        //Init Hunger
+        setMaxHungerHumans();
+        setMaxHungerZombies();
+        AmountOfHHunger = maxHungerHuman;
+        AmountOfZHunger = MaxHungerZombies;
     }
 
     private void applyStatModifications()
@@ -260,12 +292,12 @@ public class Stats : MonoBehaviour
 
     private void advanceTurn()
     {
-        nbTurns++;
+        NbTurns++;
     }
 
     private bool isHumanMaxCapacity()
     {
-        int cap = nbHumanHouses * 10;
+        int cap = nbHumanHouses * HOUSE_SUPPLY_CAP;
         if (AmountOfHumans > cap)
             return true;
         else
@@ -274,7 +306,7 @@ public class Stats : MonoBehaviour
 
     private bool isZombieMaxCapacity()
     {
-        int cap = nbZombieHouses * 10;
+        int cap = nbZombieHouses * HOUSE_SUPPLY_CAP;
         if (AmountOfZombies > cap)
             return true;
         else
@@ -284,9 +316,9 @@ public class Stats : MonoBehaviour
     public void endTurn()
     {
         if (!isHumanMaxCapacity())
-            AmountOfHumans += (2 * AmountHumanHouse);
+            //AmountOfHumans += (HUMANS_PER_HOUSE * AmountHumanHouse);
         if (isZombieMaxCapacity())
-            AmountOfZombies -= AmountOfZombies % (AmountZombieHouse * 10);
+            //AmountOfZombies -= AmountOfZombies % (AmountZombieHouse * HOUSE_SUPPLY_CAP);
         applyStatModifications();
         calculateHunger();
         advanceTurn();
@@ -294,8 +326,18 @@ public class Stats : MonoBehaviour
 
     private void calculateHunger()
     {
-        AmountOfHHunger -= 10 * AmountOfHumans;
-        AmountOfZHunger -= 50 * AmountOfZombies;        
+        AmountOfHHunger -= HUNGER_DEDUCT_PER_DAY_H * AmountOfHumans;
+        AmountOfZHunger -= HUNGER_DEDUCT_PER_DAY_Z * AmountOfZombies;        
+    }
+
+    private void setMaxHungerHumans()
+    {
+        MaxHungerHuman = AmountOfHumans * HUNGER_PER_HUMAN;
+    }
+
+    private void setMaxHungerZombies()
+    {
+        MaxHungerZombies = AmountOfZombies * HUNGER_PER_ZOMBIE;
     }
 
     public String displayStats()
@@ -336,7 +378,7 @@ public class Stats : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        resetStats(3, 6, 7, 8, 4, 1, 5, 5, 5, 5);
+        resetStats(3, 6, 7, 8, 4, 1, 1, 5, 5, 5);
 	}
 	
 	// Update is called once per frame
