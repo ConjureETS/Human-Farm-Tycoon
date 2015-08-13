@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Stats : MonoBehaviour
 {
     #region attributes
+
+    private int nbTurns;
+
     private int amountOfRock;
     private int amountOfWood;
     private int amountOfCorpse;
@@ -22,8 +26,38 @@ public class Stats : MonoBehaviour
     private int nbZombieAssigneRock;
     private int nbZombieAssigneCorpse;
     private int nbZombieAssigneMeat;
-    
-	public int NbZombieAssigneMeat
+
+    private int nbHumanHouses;
+    private int nbZombieHouses;
+
+    private int humanHunger;
+    private int zombieHunger;
+
+    public int AmountOfZHunger
+    {
+        get { return zombieHunger; }
+        set { zombieHunger = value; }
+    }
+
+    public int AmountOfHHunger
+    {
+        get { return  humanHunger; }
+        set {  humanHunger = value; }
+    }
+
+    public int AmountHumanHouse
+    {
+        get { return nbHumanHouses; }
+        set { nbHumanHouses = value; }
+    }
+
+    public int AmountZombieHouse
+    {
+        get { return nbZombieHouses; }
+        set { nbZombieHouses = value; }
+    }
+
+    public int NbZombieAssigneMeat
 	{
 		get { return nbZombieAssigneMeat;}
 		set { nbZombieAssigneMeat = value;}
@@ -112,6 +146,11 @@ public class Stats : MonoBehaviour
         set { amountOfZombiesAvail = value; }
     }
 
+    public int NbTurns
+    {
+        get { return nbTurns; }
+        set { nbTurns = value; }
+    }
 
     public void addCorpse()
     {
@@ -184,7 +223,6 @@ public class Stats : MonoBehaviour
     }
 #endregion
 
-
     public Stats(int nbRock, int nbWood, int nbCorpse, int nbMeat, int nbHumans, int nbZombies)
     {
         resetStats(nbRock, nbWood, nbCorpse, nbMeat, nbHumans, nbZombies, 5, 5, 5, 5);
@@ -208,11 +246,97 @@ public class Stats : MonoBehaviour
         NbZombieAssigneCorpse = 0;
         NbZombieAssigneMeat = 0;
         AmountOfZombiesAvail = AmountOfZombies;
+        AmountOfHHunger = 250 * AmountOfHumans;
+        AmountOfZHunger = 500 * AmountOfZombies;
     }
 
-	// Use this for initialization
-	void Start () {
-        resetStats(7, 6, 5, 4, 4, 10, 5, 2, 3, 1);
+    private void applyStatModifications()
+    {
+        AmountOfCorpse += (NbZombieAssigneCorpse * NbOfCorpseByZombie);
+        AmountOfMeat += (NbZombieAssigneMeat * NbOfMeatByZombie);
+        AmountOfRock += (NbZombieAssigneRock * NbOfRockByZombie);
+        AmountOfWood += (NbZombieAssigneWood * NbOfWoodByZombie);
+    }
+
+    private void advanceTurn()
+    {
+        nbTurns++;
+    }
+
+    private bool isHumanMaxCapacity()
+    {
+        int cap = nbHumanHouses * 10;
+        if (AmountOfHumans > cap)
+            return true;
+        else
+            return false;
+    }
+
+    private bool isZombieMaxCapacity()
+    {
+        int cap = nbZombieHouses * 10;
+        if (AmountOfZombies > cap)
+            return true;
+        else
+            return false;
+    }
+
+    public void endTurn()
+    {
+        if (!isHumanMaxCapacity())
+            AmountOfHumans += (2 * AmountHumanHouse);
+        if (isZombieMaxCapacity())
+            AmountOfZombies -= AmountOfZombies % (AmountZombieHouse * 10);
+        applyStatModifications();
+        calculateHunger();
+        advanceTurn();
+    }
+
+    private void calculateHunger()
+    {
+        AmountOfHHunger -= 10 * AmountOfHumans;
+        AmountOfZHunger -= 50 * AmountOfZombies;        
+    }
+
+    public String displayStats()
+    {
+        //TODO: Needs completion and formatting
+        String body = "";
+        body += "Wood: " + AmountOfWood + "\n";
+        body += "Meat: " + AmountOfMeat + "\n";
+        body += "Corpses: " + AmountOfCorpse + "\n";
+        body += "Rock: " + AmountOfRock + "\n";
+
+        return body;
+    }
+
+    public String displayAddingStats()
+    {
+        //TODO: Needs completion and formatting
+        String body = "";
+        body += "+" + NbZombieAssigneWood * NbOfWoodByZombie + "\n" + "\n";
+        body += "+" + NbZombieAssigneRock * NbOfRockByZombie + "\n" + "\n";
+        body += "+" + NbZombieAssigneMeat * NbOfMeatByZombie + "\n" + "\n";
+        body += "+" + NbZombieAssigneCorpse * NbOfCorpseByZombie + "\n" + "\n";
+
+        return body;
+    }
+
+    public String displayCurrentStats()
+    {
+        String body = "";
+        body += AmountOfWood + "\n" + "\n";
+        body += AmountOfRock + "\n" + "\n";
+        body += AmountOfMeat + "\n" + "\n";
+        body += AmountOfCorpse + "\n" + "\n";
+
+        return body;
+
+    }
+
+    // Use this for initialization
+    void Start () {
+        resetStats(3, 6, 7, 8, 4, 1, 5, 5, 5, 5);
 	}
 	
 	// Update is called once per frame
