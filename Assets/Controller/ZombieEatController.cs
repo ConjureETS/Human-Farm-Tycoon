@@ -2,39 +2,40 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class WorkerControllerMeat : MonoBehaviour
-{
+public class ZombieEatController : MonoBehaviour {
 
-    /*public Text nbWorker;
+    public Text nbWorker;
     public Text zombieAvailable;
     public Text nbRessourceExpected;
+    public Text nbCorpseAvailable;
     public Button AddButton;
     public Button RemoveButton;
     private Stats stats;
 
-
-
     public void AddWorker()
     {
         stats.removeZombieAvail();
-        stats.NbZombieAssigneMeat++;
+        stats.NbZombieAssigneEat++;
+        stats.AmountOfCorpse--;
         UpdateView();
     }
 
     public void LessWorker()
     {
         stats.addZombieAvail();
-        stats.NbZombieAssigneMeat--;
+        stats.NbZombieAssigneEat--;
+        stats.AmountOfCorpse--;
         UpdateView();
     }
 
     private void UpdateView()
     {
-        zombieAvailable.text = stats.AmountOfZombiesAvail + "/" + stats.AmountOfZombies;
-        nbRessourceExpected.text = "" + stats.NbOfMeatByZombie * stats.NbZombieAssigneMeat;
-        nbWorker.text = "" + stats.NbZombieAssigneMeat;
+        zombieAvailable.text = "Zombie Available : " + stats.AmountOfZombiesAvail + "/" + stats.AmountOfZombies;
+        nbRessourceExpected.text = "Zombie Expected : " + stats.NbZombieAssigneEat * stats.NbOfHungerByCoprseEat;
+        nbWorker.text = "" + stats.NbZombieAssigneEat;
+        nbCorpseAvailable.text = "Corpse : " + stats.AmountOfCorpse;
 
-        if (stats.AmountOfZombiesAvail <= 0)
+        if (stats.AmountOfZombiesAvail <= 0 || stats.AmountOfCorpse <= 0)
         {
             AddButton.enabled = false;
         }
@@ -43,7 +44,7 @@ public class WorkerControllerMeat : MonoBehaviour
             AddButton.enabled = true;
         }
 
-        if (stats.NbZombieAssigneMeat <= 0)
+        if (stats.NbZombieAssigneEat <= 0)
         {
             RemoveButton.enabled = false;
         }
@@ -63,5 +64,5 @@ public class WorkerControllerMeat : MonoBehaviour
     void Update()
     {
         UpdateView();
-    }*/
+    }
 }

@@ -2,39 +2,40 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class WorkerControllerMeat : MonoBehaviour
-{
+public class WorkerControllerConvertCorps : MonoBehaviour {
 
-    /*public Text nbWorker;
+    public Text nbWorker;
     public Text zombieAvailable;
     public Text nbRessourceExpected;
+    public Text nbCorpseAvailable;
     public Button AddButton;
     public Button RemoveButton;
     private Stats stats;
-
-
-
+    
     public void AddWorker()
     {
         stats.removeZombieAvail();
-        stats.NbZombieAssigneMeat++;
+        stats.NbZombieAssigneCorpse++;
+        stats.AmountOfCorpse--;
         UpdateView();
     }
 
     public void LessWorker()
     {
         stats.addZombieAvail();
-        stats.NbZombieAssigneMeat--;
+        stats.NbZombieAssigneCorpse--;
+        stats.AmountOfCorpse--;
         UpdateView();
     }
 
     private void UpdateView()
     {
-        zombieAvailable.text = stats.AmountOfZombiesAvail + "/" + stats.AmountOfZombies;
-        nbRessourceExpected.text = "" + stats.NbOfMeatByZombie * stats.NbZombieAssigneMeat;
-        nbWorker.text = "" + stats.NbZombieAssigneMeat;
+        zombieAvailable.text = "Zombie Available : " + stats.AmountOfZombiesAvail + "/" + stats.AmountOfZombies;
+        nbRessourceExpected.text = "Zombie Expected : " + stats.NbZombieAssigneCorpse;
+        nbWorker.text = "" + stats.NbZombieAssigneCorpse;
+        nbCorpseAvailable.text = "Corpse : " + stats.AmountOfCorpse;
 
-        if (stats.AmountOfZombiesAvail <= 0)
+        if (stats.AmountOfZombiesAvail <= 0 || stats.AmountOfCorpse <= 0)
         {
             AddButton.enabled = false;
         }
@@ -43,7 +44,7 @@ public class WorkerControllerMeat : MonoBehaviour
             AddButton.enabled = true;
         }
 
-        if (stats.NbZombieAssigneMeat <= 0)
+        if (stats.NbZombieAssigneCorpse <= 0)
         {
             RemoveButton.enabled = false;
         }
@@ -57,11 +58,12 @@ public class WorkerControllerMeat : MonoBehaviour
     void Start()
     {
         stats = GameObject.Find("Stats").gameObject.GetComponent<Stats>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateView();
-    }*/
+    }
 }

@@ -21,11 +21,13 @@ public class Stats : MonoBehaviour
     private int nbOfRockByZombie;
     private int nbOfMeatByZombie;
     private int nbOfCorpseByZombie;
+    private int nbOfHungerByCoprseEat;
 
     private int nbZombieAssigneWood;
     private int nbZombieAssigneRock;
     private int nbZombieAssigneCorpse;
-    private int nbZombieAssigneMeat;
+    private int nbZombieAssigneEat;
+    private int nbZombieAssigneMakeEatHuman;
 
     private int nbHumanHouses;
     private int nbZombieHouses;
@@ -57,11 +59,20 @@ public class Stats : MonoBehaviour
         set { nbZombieHouses = value; }
     }
 
-    public int NbZombieAssigneMeat
+    public int NbZombieAssigneEat
 	{
-		get { return nbZombieAssigneMeat;}
-		set { nbZombieAssigneMeat = value;}
-	}	
+		get { return nbZombieAssigneEat;}
+		set { nbZombieAssigneEat = value;}
+	}
+
+    public int NbZombieAssigneMakeEatHuman
+    {
+        get { return nbZombieAssigneMakeEatHuman; }
+        set { nbZombieAssigneMakeEatHuman = value; }
+    }
+    
+
+
 
 	public int NbZombieAssigneCorpse
 	{
@@ -103,6 +114,12 @@ public class Stats : MonoBehaviour
     {
         get { return nbOfWoodByZombie; }
         set { nbOfWoodByZombie = value; }
+    }
+
+    public int NbOfHungerByCoprseEat
+    {
+        get { return nbOfHungerByCoprseEat; }
+        set { nbOfHungerByCoprseEat = value; }
     }
     
     public int AmountOfMeat
@@ -244,7 +261,6 @@ public class Stats : MonoBehaviour
         NbZombieAssigneWood = 0;
         NbZombieAssigneRock = 0;
         NbZombieAssigneCorpse = 0;
-        NbZombieAssigneMeat = 0;
         AmountOfZombiesAvail = AmountOfZombies;
         AmountOfHHunger = 250 * AmountOfHumans;
         AmountOfZHunger = 500 * AmountOfZombies;
@@ -253,7 +269,7 @@ public class Stats : MonoBehaviour
     private void applyStatModifications()
     {
         AmountOfCorpse += (NbZombieAssigneCorpse * NbOfCorpseByZombie);
-        AmountOfMeat += (NbZombieAssigneMeat * NbOfMeatByZombie);
+        //AmountOfMeat += (NbZombieAssigneMeat * NbOfMeatByZombie);
         AmountOfRock += (NbZombieAssigneRock * NbOfRockByZombie);
         AmountOfWood += (NbZombieAssigneWood * NbOfWoodByZombie);
     }
@@ -316,7 +332,7 @@ public class Stats : MonoBehaviour
         String body = "";
         body += "+" + NbZombieAssigneWood * NbOfWoodByZombie + "\n" + "\n";
         body += "+" + NbZombieAssigneRock * NbOfRockByZombie + "\n" + "\n";
-        body += "+" + NbZombieAssigneMeat * NbOfMeatByZombie + "\n" + "\n";
+        body += "+" + nbZombieAssigneMakeEatHuman * NbOfMeatByZombie + "\n" + "\n";
         body += "+" + NbZombieAssigneCorpse * NbOfCorpseByZombie + "\n" + "\n";
 
         return body;
