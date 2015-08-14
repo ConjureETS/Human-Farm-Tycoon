@@ -7,10 +7,11 @@ public class ConfirmStatsScript : MonoBehaviour {
     public Text currentValues;
     public Text addedValues;
     public Text alertTitle;
+    private Stats stats;
 
 	// Use this for initialization
 	void Start () {
-        Stats stats = GameObject.Find("Stats").gameObject.GetComponent<Stats>();
+        stats = GameObject.Find("Stats").gameObject.GetComponent<Stats>();
         currentValues.text = stats.displayCurrentStats();
         addedValues.text = stats.displayAddingStats();
         alertTitle.text = "DAY " + stats.NbTurns;
@@ -20,4 +21,9 @@ public class ConfirmStatsScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void ModifieStats()
+    {
+        stats.UpdateStats();
+    }
 }

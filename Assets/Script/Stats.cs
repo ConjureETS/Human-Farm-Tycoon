@@ -394,11 +394,25 @@ public class Stats : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        resetStats(3, 6, 7, 8, 4, 1, 1, 5, 5, 5);
+        resetStats(3, 6, 7, 8, 4, 10, 6, 5, 5, 5);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    public String UpdateStats()
+    {
+        Evenement evenement = new Evenement();
+        evenement.GetEventForThisRound(NbTurns);
+        
+        AmountOfWood = AmountOfWood + NbZombieAssigneWood * NbOfWoodByZombie * evenement.MultiWood/10;
+        AmountOfRock = AmountOfRock + NbZombieAssigneRock * NbOfRockByZombie * evenement.MutliRock/10;
+        AmountOfCorpse = AmountOfCorpse + NbZombieAssigneCorpse * NbOfCorpseByZombie * evenement.MultiCorps/10;
+        NbTurns++;
+        return evenement.descriptionEvent;
+    }
+
+    
 }

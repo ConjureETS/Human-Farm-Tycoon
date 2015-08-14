@@ -14,16 +14,12 @@ public class RessourceView: MonoBehaviour{
     {
         Stats stats = GameObject.Find("Stats").gameObject.GetComponent<Stats>();
         rc = new RessourceController(stats, corpseText, rockText, woodText, meatText);
-        setResources();
-    }
 
-    public void setResources() {
-        rc.UpdateView();
     }
 
     void Update()
     {
-        
+        rc.UpdateView();
 
     }
 }
