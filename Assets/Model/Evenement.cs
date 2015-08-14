@@ -35,7 +35,7 @@ public class Evenement
                 MultiCorps = 10;
                 break;
             case 3:
-                descriptionEvent = "Party day";
+                descriptionEvent = "Party time";
                 MultiWood = 10;
                 MutliRock = 10;
                 MultiCorps = 10;
@@ -59,7 +59,7 @@ public class Evenement
                 MultiCorps = 10;
                 break;
             case 7:
-                descriptionEvent = "Mutiny of Zombie";
+                descriptionEvent = "Zombie Mutiny";
                 MultiWood = 0;
                 MutliRock = 0;
                 MultiCorps = 0;
