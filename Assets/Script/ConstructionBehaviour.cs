@@ -3,33 +3,33 @@ using System.Collections;
 
 public class ConstructionBehaviour : MonoBehaviour {
 
-	public int ConstructionType;
+	public int ConstructionType =-1 ;
 	public GameObject maisonHumain;
 	public GameObject maisonZombie;
-	public GameObject champ;
 	private GameObject SwitchPrefab;
 
 	void OnMouseDown()
 	{
+		if (ConstructionType == -1)
+			int.TryParse(Input.inputString, out ConstructionType);
 		switch (ConstructionType) {
 		case 1:
 			SwitchPrefab = maisonHumain;
 			break;
 		case 2:
-			SwitchPrefab = champ;
-			break;
-		case 3:
 			SwitchPrefab = maisonZombie;
 			break;
 		default:
-			SwitchPrefab = maisonHumain;
+			SwitchPrefab = null;
 			break;
 		}
 		switchPrefab ();
 	}
 	void switchPrefab()
 	{
-		Instantiate (SwitchPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
-		DestroyObject (this.gameObject);
+		if (SwitchPrefab != null) {
+			Instantiate (SwitchPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
+			DestroyObject (this.gameObject);
+		}
 	}
 }
