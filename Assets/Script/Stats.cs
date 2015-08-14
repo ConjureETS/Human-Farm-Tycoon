@@ -402,6 +402,8 @@ public class Stats : MonoBehaviour
 	
 	}
 
+
+    //Do at the end of a turn
     public String UpdateStats()
     {
         Evenement evenement = new Evenement();
@@ -410,8 +412,19 @@ public class Stats : MonoBehaviour
         AmountOfWood = AmountOfWood + NbZombieAssigneWood * NbOfWoodByZombie * evenement.MultiWood/10;
         AmountOfRock = AmountOfRock + NbZombieAssigneRock * NbOfRockByZombie * evenement.MutliRock/10;
         AmountOfCorpse = AmountOfCorpse + NbZombieAssigneCorpse * NbOfCorpseByZombie * evenement.MultiCorps/10;
+
+        ResetZombieAssigne();
         NbTurns++;
         return evenement.descriptionEvent;
+    }
+
+    private void ResetZombieAssigne()
+    {
+        NbZombieAssigneCorpse = 0;
+        NbZombieAssigneWood = 0;
+        NbZombieAssigneRock =0;
+        nbZombieAssigneMakeEatHuman  =0;
+        AmountOfZombiesAvail = AmountOfZombies;
     }
 
     

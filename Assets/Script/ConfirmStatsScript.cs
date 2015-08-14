@@ -7,14 +7,17 @@ public class ConfirmStatsScript : MonoBehaviour {
     public Text currentValues;
     public Text addedValues;
     public Text alertTitle;
+    public Text descrEvent;
     private Stats stats;
+
+
+    void Awake()
+    {
+        stats = GameObject.Find("Stats").gameObject.GetComponent<Stats>();
+    }
 
 	// Use this for initialization
 	void Start () {
-        stats = GameObject.Find("Stats").gameObject.GetComponent<Stats>();
-        currentValues.text = stats.displayCurrentStats();
-        addedValues.text = stats.displayAddingStats();
-        alertTitle.text = "DAY " + stats.NbTurns;
     }
 	
 	// Update is called once per frame
@@ -22,8 +25,16 @@ public class ConfirmStatsScript : MonoBehaviour {
 	
 	}
 
+    public void UpdateView()
+    {
+        currentValues.text = stats.displayCurrentStats();
+        addedValues.text = stats.displayAddingStats();
+        alertTitle.text = "DAY " + stats.NbTurns;
+    }
+
     public void ModifieStats()
     {
-        stats.UpdateStats();
+
+        descrEvent.text = stats.UpdateStats();
     }
 }
