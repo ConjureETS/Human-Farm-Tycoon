@@ -35,6 +35,6 @@ public class ConfirmStatsScript : MonoBehaviour {
     public void ModifieStats()
     {
 
-        descrEvent.text = stats.UpdateStats();
+        descrEvent.text = stats.endTurn();
     }
 }

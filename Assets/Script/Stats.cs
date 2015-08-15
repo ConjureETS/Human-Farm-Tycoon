@@ -298,12 +298,20 @@ public class Stats : MonoBehaviour
         AmountOfZHunger = MaxHungerZombies;
     }
 
-    private void applyStatModifications()
-    {
-        AmountOfCorpse += (NbZombieAssigneCorpse * NbOfCorpseByZombie);
+    private string applyStatModifications()
+    {     
+        
+        Evenement evenement = new Evenement();
+        evenement.GetEventForThisRound(NbTurns);
+
+        AmountOfCorpse += (NbZombieAssigneCorpse * NbOfCorpseByZombie)* evenement.MultiCorps / 10;
         //AmountOfMeat += (NbZombieAssigneMeat * NbOfMeatByZombie);
-        AmountOfRock += (NbZombieAssigneRock * NbOfRockByZombie);
-        AmountOfWood += (NbZombieAssigneWood * NbOfWoodByZombie);
+        AmountOfRock += (NbZombieAssigneRock * NbOfRockByZombie)* evenement.MutliRock / 10;
+        AmountOfWood += (NbZombieAssigneWood * NbOfWoodByZombie)* evenement.MultiWood / 10;
+
+        ResetZombieAssigne();
+
+        return evenement.descriptionEvent;
     }
 
     private void advanceTurn()
@@ -329,21 +337,28 @@ public class Stats : MonoBehaviour
             return false;
     }
 
-    public void endTurn()
+    public string endTurn()
     {
-        if (!isHumanMaxCapacity())
+ 
+
+        //if (!isHumanMaxCapacity())
             //AmountOfHumans += (HUMANS_PER_HOUSE * AmountHumanHouse);
-        if (isZombieMaxCapacity())
+        //if (isZombieMaxCapacity())
             //AmountOfZombies -= AmountOfZombies % (AmountZombieHouse * HOUSE_SUPPLY_CAP);
-        applyStatModifications();
+        string descEvent = applyStatModifications();
         calculateHunger();
         advanceTurn();
+
+        return descEvent;
     }
 
     private void calculateHunger()
     {
         AmountOfHHunger -= HUNGER_DEDUCT_PER_DAY_H * AmountOfHumans;
-        AmountOfZHunger -= HUNGER_DEDUCT_PER_DAY_Z * AmountOfZombies;        
+        AmountOfZHunger -= HUNGER_DEDUCT_PER_DAY_Z * AmountOfZombies;
+
+        setMaxHungerHumans();
+        setMaxHungerZombies();
     }
 
     private void setMaxHungerHumans()
@@ -412,6 +427,10 @@ public class Stats : MonoBehaviour
         AmountOfWood = AmountOfWood + NbZombieAssigneWood * NbOfWoodByZombie * evenement.MultiWood/10;
         AmountOfRock = AmountOfRock + NbZombieAssigneRock * NbOfRockByZombie * evenement.MutliRock/10;
         AmountOfCorpse = AmountOfCorpse + NbZombieAssigneCorpse * NbOfCorpseByZombie * evenement.MultiCorps/10;
+
+
+        setMaxHungerHumans();
+        setMaxHungerZombies();
 
         ResetZombieAssigne();
         NbTurns++;
