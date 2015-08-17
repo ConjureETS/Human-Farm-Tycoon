@@ -7,7 +7,7 @@ public class Stats : MonoBehaviour
     #region constants
 
     private readonly int HOUSE_SUPPLY_CAP = 10;
-    private readonly int HUMANS_PER_HOUSE = 10;
+    private readonly int HUMANS_PER_HOUSE = 2;
     private readonly int HUNGER_PER_ZOMBIE = 100;
     private readonly int HUNGER_PER_HUMAN = 100;
     private readonly int HUNGER_DEDUCT_PER_DAY_H = 25;
@@ -385,7 +385,16 @@ public class Stats : MonoBehaviour
         //AmountOfMeat += (NbZombieAssigneMeat * NbOfMeatByZombie);
         AmountOfRock += (NbZombieAssigneRock * NbOfRockByZombie)* evenement.MutliRock / 10;
         AmountOfWood += (NbZombieAssigneWood * NbOfWoodByZombie)* evenement.MultiWood / 10;
+		AmountOfCorpse = AmountOfCorpse + nbZombieAssigneKillHuman * 4 * evenement.MultiCorps/10;
+		Debug.Log (AmountHumanHouse);
+		float r = UnityEngine.Random.value;
+		AmountOfHumans += Mathf.RoundToInt(r *(HUMANS_PER_HOUSE * AmountHumanHouse));
+		if (isHumanMaxCapacity())
+			AmountOfHumans = nbHumanHouses * HOUSE_SUPPLY_CAP; 
 
+		
+		AmountOfZHunger +=  NbOfHungerByCoprseEat * nbZombieAssigneEat;
+		AmountOfZombies += NbZombieAssigneCorpse;
         ResetZombieAssigne();
 
         return evenement.descriptionEvent;
@@ -422,7 +431,7 @@ public class Stats : MonoBehaviour
             //AmountOfHumans += (HUMANS_PER_HOUSE * AmountHumanHouse);
         //if (isZombieMaxCapacity())
             //AmountOfZombies -= AmountOfZombies % (AmountZombieHouse * HOUSE_SUPPLY_CAP);
-        string descEvent = applyStatModifications();
+		string descEvent = applyStatModifications();
         calculateHunger();
         advanceTurn();
 		feed();
@@ -504,13 +513,9 @@ public class Stats : MonoBehaviour
     {
         Evenement evenement = new Evenement();
         evenement.GetEventForThisRound(NbTurns);
-		float r = UnityEngine.Random.value;
         AmountOfWood = AmountOfWood + NbZombieAssigneWood * NbOfWoodByZombie * evenement.MultiWood/10;
         AmountOfRock = AmountOfRock + NbZombieAssigneRock * NbOfRockByZombie * evenement.MutliRock/10;
-        AmountOfCorpse = AmountOfCorpse + nbZombieAssigneKillHuman * 4 * evenement.MultiCorps/10;
-		AmountOfHumans =  Mathf.RoundToInt( HUMANS_PER_HOUSE * ((AmountHumanHouse==0)?1:AmountHumanHouse)*r) ;
-		AmountOfZHunger +=  NbOfHungerByCoprseEat * nbZombieAssigneEat;
-		AmountOfZombies += NbZombieAssigneCorpse;
+
 
         setMaxHungerHumans();
         setMaxHungerZombies();
