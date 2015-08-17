@@ -19,13 +19,13 @@ public class FarmStatsController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+		UpdateView();
     }
 
     private void UpdateView()
     {
-        textNbMaison.text = "Nb Maisons : " + stats.AmountHumanHouse;
-        textNbHuman.text = "Nb Humans : " + stats.AmountOfHumans;
+        textNbMaison.text = "# Human houses : " + stats.AmountHumanHouse;
+        textNbHuman.text = "# Humans : " + stats.AmountOfHumans;
         textNbMaxHuman.text = "Max Humans : " + stats.AmountHumanHouse * 10;
     }
 }

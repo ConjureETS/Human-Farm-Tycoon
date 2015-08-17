@@ -8,14 +8,18 @@ public class RessourceController{
     Text viewRock;
     Text viewCorpse;
     Text viewMeat;
+	Text viewHuman;
+	Text viewZombie;
 
-    public RessourceController(Stats stats, Text viewW, Text viewR, Text viewC, Text viewM)
+    public RessourceController(Stats stats, Text viewW, Text viewR, Text viewC, Text viewM,Text viewH,Text viewZ)
     {
         this.stats = stats;
         this.viewCorpse = viewC;
         this.viewWood = viewW;
         this.viewRock = viewR;
         this.viewMeat = viewM;
+		this.viewHuman = viewH;
+		this.viewZombie = viewZ;
     }
 
     public void setRock(int nbRock){
@@ -48,6 +52,16 @@ public class RessourceController{
     {
         return stats.AmountOfMeat;
     }
+	public int getHumans()
+	{
+		return stats.AmountOfHumans;
+		
+	}
+	public int getZombies()
+	{
+		return stats.AmountOfZombies;
+		
+	}
 
     public void UpdateView()
     {
@@ -55,6 +69,8 @@ public class RessourceController{
         viewMeat.text = "" + getMeat() + "";
         viewWood.text = "" + getWood() + "";
         viewCorpse.text = "" + getCorpse() + "";
+		viewHuman.text = "" + getHumans() + "";
+		viewZombie.text = "" + getZombies() + "";
     }
 	
 }

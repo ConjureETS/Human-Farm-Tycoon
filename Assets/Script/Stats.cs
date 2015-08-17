@@ -7,7 +7,7 @@ public class Stats : MonoBehaviour
     #region constants
 
     private readonly int HOUSE_SUPPLY_CAP = 10;
-    private readonly int HUMANS_PER_HOUSE = 2;
+    private readonly int HUMANS_PER_HOUSE = 10;
     private readonly int HUNGER_PER_ZOMBIE = 100;
     private readonly int HUNGER_PER_HUMAN = 100;
     private readonly int HUNGER_DEDUCT_PER_DAY_H = 25;
@@ -42,6 +42,7 @@ public class Stats : MonoBehaviour
     private int nbZombieAssigneCorpse;
     private int nbZombieAssigneEat;
     private int nbZombieAssigneMakeEatHuman;
+	private int nbZombieAssigneKillHuman;
 
     private int nbHumanHouses;
     private int nbZombieHouses;
@@ -96,7 +97,11 @@ public class Stats : MonoBehaviour
         get { return nbZombieAssigneMakeEatHuman; }
         set { nbZombieAssigneMakeEatHuman = value; }
     }
-    
+	public int NbZombieAssigneKillHuman
+	{
+		get { return nbZombieAssigneKillHuman; }
+		set { nbZombieAssigneKillHuman = value; }
+	}
 
 
 
@@ -264,7 +269,79 @@ public class Stats : MonoBehaviour
     {
         amountOfZombiesAvail--;
     }
+
+	public void addCorpse(int nb)
+	{
+		amountOfCorpse+=nb;
+	}
+	
+	public void addWood(int nb)
+	{
+		amountOfWood+=nb;
+	}
+	
+	public void addMeat(int nb)
+	{
+		amountOfMeat+=nb;
+	}
+	
+	public void addRock(int nb)
+	{
+		amountOfRock+=nb;
+	}
+	
+	public void addZombie(int nb)
+	{
+		amountOfZombies+=nb;
+	}
+	
+	public void addHuman(int nb)
+	{
+		amountOfHumans+=nb;
+	}
+	
+	public void addZombieAvail(int nb)
+	{
+		amountOfZombiesAvail+=nb;
+	}
+	
+	public void removeCorpse(int nb)
+	{
+		amountOfCorpse-=nb;
+	}
+	
+	public void removeWood(int nb)
+	{
+		amountOfWood-=nb;
+	}
+	
+	public void removeMeat(int nb)
+	{
+		amountOfMeat-=nb;
+	}
+	
+	public void removeRock(int nb)
+	{
+		amountOfRock-=nb;
+	}
+	
+	public void removeZombie(int nb)
+	{
+		amountOfZombies-=nb;
+	}
+	
+	public void removeHuman(int nb)
+	{
+		amountOfHumans-=nb;
+	}
+	
+	public void removeZombieAvail(int nb)
+	{
+		amountOfZombiesAvail-=nb;
+	}
+
 #endregion
+	
 
     /*
     public Stats(int nbRock, int nbWood, int nbCorpse, int nbMeat, int nbHumans, int nbZombies)
@@ -348,10 +425,13 @@ public class Stats : MonoBehaviour
         string descEvent = applyStatModifications();
         calculateHunger();
         advanceTurn();
-
+		feed();
         return descEvent;
     }
-
+	private void feed()
+	{
+		AmountOfZHunger +=  NbOfHungerByCoprseEat * nbZombieAssigneEat;
+	}
     private void calculateHunger()
     {
         AmountOfHHunger -= HUNGER_DEDUCT_PER_DAY_H * AmountOfHumans;
@@ -403,6 +483,7 @@ public class Stats : MonoBehaviour
         body += AmountOfMeat + "\n" + "\n";
         body += AmountOfCorpse + "\n" + "\n";
 
+
         return body;
 
     }
@@ -423,11 +504,13 @@ public class Stats : MonoBehaviour
     {
         Evenement evenement = new Evenement();
         evenement.GetEventForThisRound(NbTurns);
-        
+		float r = UnityEngine.Random.value;
         AmountOfWood = AmountOfWood + NbZombieAssigneWood * NbOfWoodByZombie * evenement.MultiWood/10;
         AmountOfRock = AmountOfRock + NbZombieAssigneRock * NbOfRockByZombie * evenement.MutliRock/10;
-        AmountOfCorpse = AmountOfCorpse + NbZombieAssigneCorpse * NbOfCorpseByZombie * evenement.MultiCorps/10;
-
+        AmountOfCorpse = AmountOfCorpse + nbZombieAssigneKillHuman * 4 * evenement.MultiCorps/10;
+		AmountOfHumans =  Mathf.RoundToInt( HUMANS_PER_HOUSE * ((AmountHumanHouse==0)?1:AmountHumanHouse)*r) ;
+		AmountOfZHunger +=  NbOfHungerByCoprseEat * nbZombieAssigneEat;
+		AmountOfZombies += NbZombieAssigneCorpse;
 
         setMaxHungerHumans();
         setMaxHungerZombies();
@@ -442,7 +525,10 @@ public class Stats : MonoBehaviour
         NbZombieAssigneCorpse = 0;
         NbZombieAssigneWood = 0;
         NbZombieAssigneRock =0;
+		NbZombieAssigneEat = 0;
         nbZombieAssigneMakeEatHuman  =0;
+		nbZombieAssigneKillHuman = 0;
+		nbZombieAssigneCorpse = 0;
         AmountOfZombiesAvail = AmountOfZombies;
     }
 

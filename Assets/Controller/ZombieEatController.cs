@@ -24,14 +24,15 @@ public class ZombieEatController : MonoBehaviour {
     {
         stats.addZombieAvail();
         stats.NbZombieAssigneEat--;
-        stats.AmountOfCorpse--;
+        stats.AmountOfCorpse++;
         UpdateView();
     }
 
     private void UpdateView()
     {
+		stats.NbOfHungerByCoprseEat = 10;
         zombieAvailable.text = "Zombie Available : " + stats.AmountOfZombiesAvail + "/" + stats.AmountOfZombies;
-        nbRessourceExpected.text = "Zombie Expected : " + stats.NbZombieAssigneEat * stats.NbOfHungerByCoprseEat;
+        nbRessourceExpected.text = "Hunger Quenched  : " + stats.NbZombieAssigneEat * stats.NbOfHungerByCoprseEat;
         nbWorker.text = "" + stats.NbZombieAssigneEat;
         nbCorpseAvailable.text = "Corpse : " + stats.AmountOfCorpse;
 

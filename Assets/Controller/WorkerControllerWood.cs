@@ -41,7 +41,6 @@ public class WorkerControllerWood : MonoBehaviour{
         {
             AddButton.enabled = true;
         }
-
         if (stats.NbZombieAssigneWood <= 0)
         {
             RemoveButton.enabled = false;

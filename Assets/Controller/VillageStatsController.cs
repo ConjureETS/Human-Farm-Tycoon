@@ -17,12 +17,12 @@ public class VillageStatsController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    
+		UpdateView();
 	}
 
     private void UpdateView(){
-        textNbMaison.text = "Nb Maisons : " + stats.AmountZombieHouse;
-        textNbZombie.text = "Nb Zombies : " + stats.AmountOfZombies;
+        textNbMaison.text = "# of Zombie Houses : " + stats.AmountZombieHouse;
+        textNbZombie.text = "# of Zombies : " + stats.AmountOfZombies;
         textNbMaxZombie.text = "Max Zombies : " + stats.AmountZombieHouse * 10;
     }
 }
