@@ -391,8 +391,6 @@ public class Stats : MonoBehaviour
 		AmountOfHumans += Mathf.RoundToInt(r *(HUMANS_PER_HOUSE * AmountHumanHouse));
 		if (isHumanMaxCapacity())
 			AmountOfHumans = nbHumanHouses * HOUSE_SUPPLY_CAP; 
-
-		
 		AmountOfZHunger +=  NbOfHungerByCoprseEat * nbZombieAssigneEat;
 		AmountOfZombies += NbZombieAssigneCorpse;
         ResetZombieAssigne();
